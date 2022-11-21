@@ -22,7 +22,7 @@ int	free_tableinfo(t_tableinfo *tableinfo)
 		free(tableinfo->philo_stats);
 	if (tableinfo->fork_ids)
 		free(tableinfo->fork_ids);
-	return (1);
+	return (-1);
 }
 
 int	alloc_tableinfo(t_tableinfo *tinfo)
@@ -49,7 +49,7 @@ int	alloc_philoinfos(t_philoinfo **philoinfos, t_tableinfo *tableinfo)
 	n = tableinfo->n_philos;
 	*philoinfos = malloc(sizeof(t_philoinfo) * n);
 	if (!(*philoinfos))
-		return (1);
+		return (-1);
 	i = 0;
 	while (i < n)
 	{
@@ -66,11 +66,11 @@ int	alloc_philoinfos(t_philoinfo **philoinfos, t_tableinfo *tableinfo)
 int	alloc_infos(t_tableinfo *tableinfo, t_philoinfo **philoinfos)
 {
 	if (alloc_tableinfo(tableinfo))
-		return (1);
+		return (-1);
 	if (alloc_philoinfos(philoinfos, tableinfo))
 	{
 		free_tableinfo(tableinfo);
-		return (1);
+		return (-1);
 	}
 	return (0);
 }

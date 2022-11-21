@@ -17,18 +17,18 @@
 int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 {
 	if (ft_atoi_if_valid(argv[1], &tinfo->n_philos) || tinfo->n_philos < 1)
-		return (1);
+		return (-1);
 	if (ft_atoi_if_valid(argv[2], &tinfo->time_die) || tinfo->time_die < 0)
-		return (1);
+		return (-1);
 	if (ft_atoi_if_valid(argv[3], &tinfo->time_eat) || tinfo->time_eat < 0)
-		return (1);
+		return (-1);
 	if (ft_atoi_if_valid(argv[4], &tinfo->time_slp) || tinfo->time_slp < 0)
-		return (1);
+		return (-1);
 	if (argc == 6)
 	{
 		if (ft_atoi_if_valid(argv[5], &tinfo->n_eats_until_done)
 			|| tinfo->n_eats_until_done < 0)
-			return (1);
+			return (-1);
 	}
 	else
 		tinfo->n_eats_until_done = -1;

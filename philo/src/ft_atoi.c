@@ -59,9 +59,9 @@ static int	ft_atoi_strict(const char *str, int *ret)
 	{
 		nbr = nbr_prev * 10 + sign * ((int)(*cursor - '0'));
 		if (sign == 1 && nbr < nbr_prev)
-			return (1);
+			return (-1);
 		if (sign == -1 && nbr > nbr_prev)
-			return (1);
+			return (-1);
 		nbr_prev = nbr;
 		cursor++;
 	}
@@ -72,7 +72,7 @@ static int	ft_atoi_strict(const char *str, int *ret)
 int	ft_atoi_if_valid(char *str, int *ret)
 {
 	if (!is_number(str))
-		return (1);
+		return (-1);
 	return (ft_atoi_strict(str, ret));
 }
 
