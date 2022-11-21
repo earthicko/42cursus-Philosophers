@@ -40,11 +40,6 @@ int	init_mutexes(t_tableinfo *tableinfo)
 	return (0);
 }
 
-void	*start_routine(void *arg)
-{
-	return (arg);
-}
-
 int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos)
 {
 	int	i;

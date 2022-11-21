@@ -36,4 +36,6 @@ typedef struct s_philoinfo
 	t_mutex		*forks[2];
 	int			*stat_report;
 }	t_philoinfo;
+
+void	*start_routine(void *arg);
 #endif

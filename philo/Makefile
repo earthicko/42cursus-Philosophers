@@ -13,7 +13,8 @@ SRCNAME			= \
 				error_handler \
 				parser \
 				allocator \
-				initializer
+				initializer \
+				philosopher
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))
