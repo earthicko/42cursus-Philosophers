@@ -1,0 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   allocator.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: donghyle <donghyle@student.42seoul.>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/21 21:50:57 by donghyle          #+#    #+#             */
+/*   Updated: 2022/11/21 21:51:04 by donghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+#include <stdlib.h>
+#include <string.h>
+
+int	free_tableinfo(t_tableinfo *tableinfo)
+{
+	if (tableinfo->philo_ids)
+		free(tableinfo->philo_ids);
+	if (tableinfo->philo_stats)
+		free(tableinfo->philo_stats);
+	if (tableinfo->fork_ids)
+		free(tableinfo->fork_ids);
+	return (1);
+}
+
+int	alloc_tableinfo(t_tableinfo *tinfo)
+{
+	tinfo->philo_ids = NULL;
+	tinfo->philo_stats = NULL;
+	tinfo->fork_ids = NULL;
+	tinfo->philo_ids = malloc(sizeof(t_thread) * tinfo->n_philos);
+	tinfo->philo_stats = malloc(sizeof(int) * tinfo->n_philos);
+	tinfo->fork_ids = malloc(sizeof(t_mutex) * tinfo->n_philos);
+	if (!(tinfo->philo_ids && tinfo->philo_stats && tinfo->fork_ids))
+		return (free_tableinfo(tinfo));
+	memset(tinfo->philo_ids, 0, sizeof(t_thread) * tinfo->n_philos);
+	memset(tinfo->philo_stats, 0, sizeof(int) * tinfo->n_philos);
+	memset(tinfo->fork_ids, 0, sizeof(t_mutex) * tinfo->n_philos);
+	return (0);
+}
+
+int	alloc_philoinfos(t_philoinfo **philoinfos, t_tableinfo *tableinfo)
+{
+	int	i;
+	int	n;
+
+	n = tableinfo->n_philos;
+	*philoinfos = malloc(sizeof(t_philoinfo) * n);
+	if (!(*philoinfos))
+		return (1);
+	i = 0;
+	while (i < n)
+	{
+		(*philoinfos)[i].i = i + 1;
+		(*philoinfos)[i].id = tableinfo->philo_ids + i;
+		(*philoinfos)[i].forks[0] = tableinfo->fork_ids + i;
+		(*philoinfos)[i].forks[1] = tableinfo->fork_ids + (i + 1) % n;
+		(*philoinfos)[i].stat_report = tableinfo->philo_stats + i;
+		i++;
+	}
+	return (0);
+}
+
+int	alloc_infos(t_tableinfo *tableinfo, t_philoinfo **philoinfos)
+{
+	if (alloc_tableinfo(tableinfo))
+		return (1);
+	if (alloc_philoinfos(philoinfos, tableinfo))
+	{
+		free_tableinfo(tableinfo);
+		return (1);
+	}
+	return (0);
+}
