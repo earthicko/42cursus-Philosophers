@@ -22,7 +22,7 @@ DEP				= $(addprefix src/, $(addsuffix .d, $(SRCNAME)))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INC_DIR) $(OBJ) -o $@
+	$(CC) $(CFLAGS) $(INC_DIR) $(OBJ) -o $@ -lpthread
 
 -include $(DEP)
 
