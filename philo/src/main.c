@@ -42,7 +42,10 @@ int	check_if_dead(t_tableinfo *tableinfo)
 	{
 		t = get_t_simulation(tableinfo) - (tableinfo->philo_t_last_eat)[i];
 		if (t > tableinfo->time_die)
+		{
+			printf("%ld %d died\n", t, i + 1);
 			return (1);
+		}
 		i++;
 	}
 	return (0);

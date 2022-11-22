@@ -41,4 +41,7 @@ typedef struct s_philoinfo
 
 time_t	get_t_simulation(t_tableinfo *info);
 void	*philo_start_routine(void *arg);
+
+int		philo_think_odd(t_philoinfo *info);
+int		philo_think_even(t_philoinfo *info);
 #endif

@@ -14,7 +14,8 @@ SRCNAME			= \
 				parser \
 				allocator \
 				initializer \
-				philosopher
+				philosopher \
+				philosopher_think
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))
