@@ -13,6 +13,7 @@
 #ifndef PHILO_H
 # define PHILO_H
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef pthread_t		t_thread;
 typedef pthread_mutex_t	t_mutex;
@@ -20,14 +21,15 @@ typedef pthread_mutex_t	t_mutex;
 typedef struct s_tableinfo
 {
 	int			n_philos;
-	int			time_die;
-	int			time_eat;
-	int			time_slp;
+	time_t		time_die;
+	time_t		time_eat;
+	time_t		time_slp;
 	int			n_eats_until_done;
 	t_thread	*philo_ids;
 	int			*philo_n_eats;
-	int			*philo_t_last_eat;
+	time_t		*philo_t_last_eat;
 	t_mutex		*fork_ids;
+	time_t		t_start;
 }	t_tableinfo;
 
 typedef struct s_philoinfo
@@ -37,5 +39,6 @@ typedef struct s_philoinfo
 	t_mutex		*forks[2];
 }	t_philoinfo;
 
-void	*start_routine(void *arg);
+time_t	get_t_simulation(t_tableinfo *info);
+void	*philo_start_routine(void *arg);
 #endif

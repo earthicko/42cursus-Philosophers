@@ -42,17 +42,21 @@ int	init_mutexes(t_tableinfo *tableinfo)
 
 int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos)
 {
-	int	i;
+	int				i;
+	struct timeval	t;
 
 	if (init_mutexes(tableinfo))
 		return (-1);
+	gettimeofday(&t, NULL);
+	tableinfo->t_start = t.tv_sec * 1000 + t.tv_usec / 1000;
+	printf("Simulation start at %ld us\n", tableinfo->t_start);
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{
 		if (pthread_create(
 				tableinfo->philo_ids + i,
 				NULL,
-				start_routine,
+				philo_start_routine,
 				philoinfos + i))
 			return (-1);
 		i++;

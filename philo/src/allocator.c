@@ -34,14 +34,14 @@ int	alloc_tableinfo(t_tableinfo *tinfo)
 	tinfo->fork_ids = NULL;
 	tinfo->philo_ids = malloc(sizeof(t_thread) * tinfo->n_philos);
 	tinfo->philo_n_eats = malloc(sizeof(int) * tinfo->n_philos);
-	tinfo->philo_t_last_eat = malloc(sizeof(int) * tinfo->n_philos);
+	tinfo->philo_t_last_eat = malloc(sizeof(time_t) * tinfo->n_philos);
 	tinfo->fork_ids = malloc(sizeof(t_mutex) * tinfo->n_philos);
 	if (!(tinfo->philo_ids && tinfo->philo_n_eats
 			&& tinfo->fork_ids && tinfo->philo_t_last_eat))
 		return (free_tableinfo(tinfo));
 	memset(tinfo->philo_ids, 0, sizeof(t_thread) * tinfo->n_philos);
 	memset(tinfo->philo_n_eats, 0, sizeof(int) * tinfo->n_philos);
-	memset(tinfo->philo_t_last_eat, 0, sizeof(int) * tinfo->n_philos);
+	memset(tinfo->philo_t_last_eat, 0, sizeof(time_t) * tinfo->n_philos);
 	memset(tinfo->fork_ids, 0, sizeof(t_mutex) * tinfo->n_philos);
 	return (0);
 }
@@ -59,9 +59,9 @@ int	alloc_philoinfos(t_philoinfo **philoinfos, t_tableinfo *tableinfo)
 	while (i < n)
 	{
 		(*philoinfos)[i].tableinfo = tableinfo;
-		(*philoinfos)[i].i = i + 1;
+		(*philoinfos)[i].i = i;
 		(*philoinfos)[i].forks[0] = tableinfo->fork_ids + i;
-		(*philoinfos)[i].forks[1] = tableinfo->fork_ids + (i + 1) % n;
+		(*philoinfos)[i].forks[1] = tableinfo->fork_ids + ((i + 1) % n);
 		i++;
 	}
 	return (0);
