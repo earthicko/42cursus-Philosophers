@@ -32,10 +32,10 @@ int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 	}
 	else
 		tinfo->n_eats_until_done = -1;
-	printf("N Philos: %d\n", tinfo->n_philos);
-	printf("Time - die: %d\n", tinfo->time_die);
-	printf("Time - eat: %d\n", tinfo->time_eat);
-	printf("Time - sleep: %d\n", tinfo->time_slp);
+	printf("N Philos            : %d\n", tinfo->n_philos);
+	printf("Time - die          : %d\n", tinfo->time_die);
+	printf("Time - eat          : %d\n", tinfo->time_eat);
+	printf("Time - sleep        : %d\n", tinfo->time_slp);
 	printf("N eatings until done: %d\n", tinfo->n_eats_until_done);
 	return (0);
 }

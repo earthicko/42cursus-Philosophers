@@ -33,10 +33,9 @@ void	*start_routine(void *arg)
 	t_philoinfo	*info;
 
 	info = arg;
-	printf("Philo %d start\n", info->i);
-	printf("Thread ID is at %p\n", info->id);
-	printf("Mutex ID is %p, %p\n", info->forks[0], info->forks[1]);
-	printf("Stat report addr: %p\n", info->stat_report);
+	printf("Philo %d start ", info->i);
+	printf("TID %p, ", info->tableinfo->philo_ids + info->i);
+	printf("MID %p | %p\n", info->forks[0], info->forks[1]);
 	while (1)
 	{
 		if (eat())
