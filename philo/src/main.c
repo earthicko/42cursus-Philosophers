@@ -47,7 +47,7 @@ int	check_if_dead(t_tableinfo *tableinfo)
 		time_starve = time_now - (tableinfo->philo_t_last_eat)[i];
 		if (time_starve > tableinfo->time_die)
 		{
-			printf("%ld %d died\n", time_starve, i + 1);
+			printf("%ld %d died\n", time_now, i + 1);
 			return (1);
 		}
 		i++;
