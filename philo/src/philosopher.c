@@ -52,10 +52,6 @@ void	*philo_start_routine(void *arg)
 
 	info = arg;
 	pthread_detach((info->tableinfo->philo_ids)[info->i]);
-	printf("Philo %d start TID %p, MID %p | %p\n",
-		info->i + 1,
-		info->tableinfo->philo_ids + info->i,
-		info->forks[0], info->forks[1]);
 	if (info->i % 2)
 		think_routine = philo_think_odd;
 	else
