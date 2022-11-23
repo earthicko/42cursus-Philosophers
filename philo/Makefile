@@ -14,6 +14,7 @@ SRCNAME			= \
 				parser \
 				allocator \
 				initializer \
+				msg_queue \
 				philosopher \
 				philo_strategy_0
 
