@@ -53,7 +53,7 @@ static void	philo_think_even(t_philoinfo *info)
 void	philo_strategy_0(t_philoinfo *info)
 {
 	if (info->i % 2)
-		usleep(1);
+		usleep(1000);
 	while (1)
 	{
 		if (info->i % 2)

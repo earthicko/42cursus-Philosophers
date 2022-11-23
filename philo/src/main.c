@@ -68,7 +68,7 @@ int	loop_until_done(t_tableinfo *tableinfo)
 		if (check_if_dead(tableinfo))
 			return (0);
 		flush_msg_queue(tableinfo->queue);
-		usleep(10);
+		usleep(10000);
 	}
 }
 
