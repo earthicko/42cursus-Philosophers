@@ -31,6 +31,7 @@ void	philo_push_msg(t_philoinfo *info, int msg)
 {
 	(info->buf).t_ms = get_t_simulation(info->tableinfo);
 	(info->buf).content = msg;
+	push_msg_queue(info->tableinfo->queue, &(info->buf));
 }
 
 void	*philo_start_routine(void *arg)
