@@ -71,6 +71,8 @@ int	main(int argc, char **argv)
 	t_tableinfo	tableinfo;
 	t_philoinfo	*philoinfos;
 
+	if (argc == 1)
+		return (print_usage());
 	if (!(argc == 5 || argc == 6))
 		return (handle_error("Invalid number of arguments."));
 	if (parse_args(argc, argv, &tableinfo))

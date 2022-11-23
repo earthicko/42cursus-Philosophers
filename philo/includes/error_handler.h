@@ -16,4 +16,5 @@
 # define CODE_ERROR 1
 
 int	handle_error(char *error_msg);
+int	print_usage(void);
 #endif
