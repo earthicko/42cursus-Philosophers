@@ -15,8 +15,10 @@
 #include "parser.h"
 #include "allocator.h"
 #include "initializer.h"
+#include "msg_printer.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int	check_if_all_eat(t_tableinfo *tableinfo)
 {
@@ -65,6 +67,8 @@ int	loop_until_done(t_tableinfo *tableinfo)
 		}
 		if (check_if_dead(tableinfo))
 			return (0);
+		flush_msg_queue(tableinfo->queue);
+		usleep(10);
 	}
 }
 

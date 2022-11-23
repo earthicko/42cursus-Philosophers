@@ -15,6 +15,7 @@ SRCNAME			= \
 				allocator \
 				initializer \
 				msg_queue \
+				msg_printer \
 				philosopher \
 				philo_strategy_0
 
