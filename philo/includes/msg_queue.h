@@ -39,4 +39,9 @@ typedef struct s_msg_queue
 	int		head;
 	t_msg	*items;
 }	t_msg_queue;
+
+t_msg_queue	*create_msg_queue(int cap);
+void		destroy_msg_queue(t_msg_queue *queue);
+int			push_msg_queue(t_msg_queue *queue, t_msg *p_msg);
+int			pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg);
 #endif
