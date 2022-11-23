@@ -50,6 +50,11 @@ static void	philo_think_even(t_philoinfo *info)
 	philo_push_msg(info, FORKTAKEN);
 }
 
+// strategy suitable for even number of philos
+// philo with n % 2 == 1 will pick fork on their left then right,
+// n % 2 == 0 vise versa.
+// philo with n % 2 == 1 will also start picking forks a little later
+// to allow n % 2 == 0 to have meal first.
 void	philo_strategy_0(t_philoinfo *info)
 {
 	if (info->i % 2)
