@@ -18,7 +18,8 @@ SRCNAME			= \
 				msg_printer \
 				philosopher \
 				philo_strategy_0 \
-				philo_strategy_1
+				philo_strategy_1 \
+				philo_strategy_2
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))
