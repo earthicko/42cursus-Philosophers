@@ -24,14 +24,16 @@ int	free_tableinfo(t_tableinfo *tableinfo)
 		free(tableinfo->philo_t_last_eat);
 	if (tableinfo->fork_ids)
 		free(tableinfo->fork_ids);
+	if (tableinfo->queue)
+		destroy_msg_queue(tableinfo->queue);
 	return (-1);
 }
 
 int	alloc_tableinfo(t_tableinfo *tinfo)
 {
-	tinfo->philo_ids = NULL;
-	tinfo->philo_n_eats = NULL;
-	tinfo->fork_ids = NULL;
+	tinfo->queue = create_msg_queue(tinfo->n_philos * 2);
+	if (!tinfo->queue)
+		return (-1);
 	tinfo->philo_ids = malloc(sizeof(t_thread) * tinfo->n_philos);
 	tinfo->philo_n_eats = malloc(sizeof(int) * tinfo->n_philos);
 	tinfo->philo_t_last_eat = malloc(sizeof(time_t) * tinfo->n_philos);

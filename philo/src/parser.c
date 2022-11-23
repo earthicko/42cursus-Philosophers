@@ -13,6 +13,7 @@
 #include "philo.h"
 #include "ft_atoi.h"
 #include <stdio.h>
+#include <string.h>
 
 static int	parse_times(char **argv, t_tableinfo *tinfo)
 {
@@ -32,6 +33,7 @@ static int	parse_times(char **argv, t_tableinfo *tinfo)
 
 int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 {
+	memset(tinfo, 0, sizeof(t_tableinfo));
 	if (parse_times(argv, tinfo))
 		return (-1);
 	if (ft_atoi_if_valid(argv[1], &tinfo->n_philos) || tinfo->n_philos < 1)
