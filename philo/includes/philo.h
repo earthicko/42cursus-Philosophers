@@ -12,6 +12,7 @@
 
 #ifndef PHILO_H
 # define PHILO_H
+# include "msg_queue.h"
 # include <pthread.h>
 # include <sys/time.h>
 
@@ -30,10 +31,12 @@ typedef struct s_tableinfo
 	time_t		*philo_t_last_eat;
 	t_mutex		*fork_ids;
 	time_t		t_start;
+	t_msg_queue	*queue;
 }	t_tableinfo;
 
 typedef struct s_philoinfo
 {
+	t_msg		buf;
 	t_tableinfo	*tableinfo;
 	int			i;
 	t_mutex		*forks[2];
@@ -41,6 +44,7 @@ typedef struct s_philoinfo
 
 time_t	get_t_simulation(t_tableinfo *info);
 void	*philo_start_routine(void *arg);
+void	philo_push_msg(t_philoinfo *info, int msg);
 
 void	philo_strategy_0(t_philoinfo *info);
 #endif

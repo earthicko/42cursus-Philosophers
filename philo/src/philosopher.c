@@ -27,11 +27,19 @@ time_t	get_t_simulation(t_tableinfo *info)
 	return (temp);
 }
 
+void	philo_push_msg(t_philoinfo *info, int msg)
+{
+	(info->buf).t = get_t_simulation(info->tableinfo);
+	(info->buf).content = msg;
+	push_msg_queue(info->tableinfo->queue, &(info->buf));
+}
+
 void	*philo_start_routine(void *arg)
 {
 	t_philoinfo		*info;
 
 	info = arg;
+	(info->buf).i = info->i + 1;
 	pthread_detach((info->tableinfo->philo_ids)[info->i]);
 	philo_strategy_0(info);
 	return (NULL);

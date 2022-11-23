@@ -11,17 +11,19 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "msg_queue.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
 
 static void	philo_eat(t_philoinfo *info)
 {
-	time_t	t_now;
+	t_msg	msg;
 
-	t_now = get_t_simulation(info->tableinfo);
-	printf("%ld %d is eating\n", t_now, info->i + 1);
-	(info->tableinfo->philo_t_last_eat)[info->i] = t_now;
+	philo_push_msg(info, EATING);
+	// TODO: handover last eating time management to msg handler
+	(info->tableinfo->philo_t_last_eat)[info->i] = msg.t;
+	// TODO: handover eating counter management to msg handler
 	(info->tableinfo->philo_n_eats)[info->i]++;
 	usleep(info->tableinfo->time_eat);
 	pthread_mutex_unlock(info->forks[0]);
@@ -30,35 +32,26 @@ static void	philo_eat(t_philoinfo *info)
 
 static void	philo_sleep(t_philoinfo *info)
 {
-	printf("%ld %d is sleeping\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, SLEEPING);
 	usleep(info->tableinfo->time_slp);
 }
 
 static void	philo_think_odd(t_philoinfo *info)
 {
-	printf("%ld %d is thinking\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, THINKING);
 	pthread_mutex_lock(info->forks[0]);
-	printf("%ld %d has taken a fork\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, FORKTAKEN);
 	pthread_mutex_lock(info->forks[1]);
-	printf("%ld %d has taken a fork\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, FORKTAKEN);
 }
 
 static void	philo_think_even(t_philoinfo *info)
 {
-	time_t	t_now;
-
-	t_now = get_t_simulation(info->tableinfo);
-	printf("%ld %d is thinking\n", t_now, info->i + 1);
+	philo_push_msg(info, THINKING);
 	pthread_mutex_lock(info->forks[1]);
-	printf("%ld %d has taken a fork\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, FORKTAKEN);
 	pthread_mutex_lock(info->forks[0]);
-	printf("%ld %d has taken a fork\n",
-		get_t_simulation(info->tableinfo), info->i + 1);
+	philo_push_msg(info, FORKTAKEN);
 }
 
 void	philo_strategy_0(t_philoinfo *info)
