@@ -23,15 +23,14 @@ time_t	get_t_simulation(t_tableinfo *info)
 	gettimeofday(&t, NULL);
 	temp = t.tv_sec * 1000;
 	temp += t.tv_usec / 1000;
-	temp -= info->t_start;
+	temp -= info->t_start_ms;
 	return (temp);
 }
 
 void	philo_push_msg(t_philoinfo *info, int msg)
 {
-	(info->buf).t = get_t_simulation(info->tableinfo);
+	(info->buf).t_ms = get_t_simulation(info->tableinfo);
 	(info->buf).content = msg;
-	push_msg_queue(info->tableinfo->queue, &(info->buf));
 }
 
 void	*philo_start_routine(void *arg)

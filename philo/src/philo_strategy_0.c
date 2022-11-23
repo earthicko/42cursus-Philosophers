@@ -19,9 +19,9 @@
 static void	philo_eat(t_philoinfo *info)
 {
 	philo_push_msg(info, EATING);
-	(info->tableinfo->philo_t_last_eat)[info->i] = (info->buf).t;
+	(info->tableinfo->philo_t_last_eat_ms)[info->i] = (info->buf).t_ms;
 	(info->tableinfo->philo_n_eats)[info->i]++;
-	usleep(info->tableinfo->time_eat);
+	usleep(info->tableinfo->time_eat_us);
 	pthread_mutex_unlock(info->forks[0]);
 	pthread_mutex_unlock(info->forks[1]);
 }
@@ -29,7 +29,7 @@ static void	philo_eat(t_philoinfo *info)
 static void	philo_sleep(t_philoinfo *info)
 {
 	philo_push_msg(info, SLEEPING);
-	usleep(info->tableinfo->time_slp);
+	usleep(info->tableinfo->time_slp_us);
 }
 
 static void	philo_think_odd(t_philoinfo *info)
@@ -53,7 +53,7 @@ static void	philo_think_even(t_philoinfo *info)
 void	philo_strategy_0(t_philoinfo *info)
 {
 	if (info->i % 2)
-		usleep(1000);
+		usleep(T_INITIAL_DELAY_US);
 	while (1)
 	{
 		if (info->i % 2)

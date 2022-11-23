@@ -44,8 +44,8 @@ int	check_if_dead(t_tableinfo *tableinfo)
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{
-		time_starve = time_now - (tableinfo->philo_t_last_eat)[i];
-		if (time_starve > tableinfo->time_die)
+		time_starve = time_now - (tableinfo->philo_t_last_eat_ms)[i];
+		if (time_starve > tableinfo->time_die_ms)
 		{
 			printf("%ld %d died\n", time_now, i + 1);
 			return (1);
@@ -68,7 +68,7 @@ int	loop_until_done(t_tableinfo *tableinfo)
 		if (check_if_dead(tableinfo))
 			return (0);
 		flush_msg_queue(tableinfo->queue);
-		usleep(10000);
+		usleep(T_PERIOD_LOOP_US);
 	}
 }
 

@@ -27,7 +27,7 @@ enum e_content
 
 typedef struct s_msg
 {
-	time_t	t;
+	time_t	t_ms;
 	int		i;
 	int		content;
 }	t_msg;
