@@ -31,7 +31,7 @@ int	free_tableinfo(t_tableinfo *tableinfo)
 
 int	alloc_tableinfo(t_tableinfo *tinfo)
 {
-	tinfo->queue = create_msg_queue(tinfo->n_philos * 2);
+	tinfo->queue = create_msg_queue(tinfo->n_philos * ((1 * 2 + 3) * 2));
 	if (!tinfo->queue)
 		return (-1);
 	tinfo->philo_ids = malloc(sizeof(t_thread) * tinfo->n_philos);
