@@ -15,7 +15,7 @@ SRCNAME			= \
 				allocator \
 				initializer \
 				philosopher \
-				philosopher_think
+				philo_strategy_0
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))
