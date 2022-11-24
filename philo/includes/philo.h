@@ -15,8 +15,8 @@
 # include "msg_queue.h"
 # include <pthread.h>
 # include <sys/time.h>
-# define T_PERIOD_LOOP 10000
-# define T_INITIAL_DELAY 1000
+# define T_PERIOD_LOOP 5000
+# define T_INITIAL_DELAY 100
 
 typedef pthread_t		t_thread;
 typedef pthread_mutex_t	t_mutex;
