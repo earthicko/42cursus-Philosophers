@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "t_info.h"
 #include "philo.h"
-#include "timetools.h"
 #include "error_handler.h"
-#include <unistd.h>
-#include <stdio.h>
+#include "timetools.h"
+#include "msg_queue.h"
+#include <pthread.h>
 #include <stdlib.h>
-#include <sys/time.h>
 
 void	philo_push_msg(t_philoinfo *info, int msg)
 {

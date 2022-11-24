@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "t_info.h"
 #include "philo.h"
-#include "msg_queue.h"
 #include "timetools.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/time.h>
+#include <pthread.h>
 
 void	philo_eat(t_philoinfo *info)
 {

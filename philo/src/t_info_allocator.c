@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "t_info.h"
+#include "msg_queue.h"
 #include <stdlib.h>
 #include <string.h>
 

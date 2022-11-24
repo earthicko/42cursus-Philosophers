@@ -12,8 +12,8 @@
 
 #ifndef T_INFO_H
 # define T_INFO_H
-# include "philo.h"
 # include "msg_queue.h"
+# include <sys/time.h>
 # include <pthread.h>
 
 typedef pthread_t		t_thread;

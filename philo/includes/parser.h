@@ -12,7 +12,7 @@
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "philo.h"
+# include "t_info.h"
 
 int	parse_args(int argc, char **argv, t_tableinfo *tinfo);
 #endif

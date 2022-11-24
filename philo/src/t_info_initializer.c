@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "t_info.h"
 #include "philo.h"
-#include <errno.h>
+#include <pthread.h>
+#include <sys/time.h>
 #include <stdio.h>
-#include <string.h>
 
 static int	abort_init_mutexes(t_tableinfo *tableinfo, int i)
 {

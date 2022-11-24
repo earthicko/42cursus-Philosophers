@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "t_info.h"
 #include "philo.h"
+#include "timetools.h"
 #include "error_handler.h"
 #include "parser.h"
-#include "t_info.h"
 #include "msg_queue.h"
-#include <stdlib.h>
+#include <sys/time.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 int	check_if_all_eat(t_tableinfo *tableinfo)

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "t_info.h"
 #include "ft_atoi.h"
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 
 static int	parse_times(char **argv, t_tableinfo *tinfo)
 {

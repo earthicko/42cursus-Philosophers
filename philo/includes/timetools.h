@@ -12,8 +12,9 @@
 
 #ifndef TIMETOOLS_H
 # define TIMETOOLS_H
-# include "philo.h"
+# include "t_info.h"
 # include <unistd.h>
+# include <sys/time.h>
 
 int		ft_usleep(useconds_t microseconds);
 time_t	get_t_simulation(t_tableinfo *info);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "t_info.h"
 #include <unistd.h>
 #include <sys/time.h>
 

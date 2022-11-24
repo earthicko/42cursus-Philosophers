@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error_handler.h"
 #include <stdio.h>
 
 int	handle_error(char *error_msg)
