@@ -37,17 +37,17 @@ int	check_if_all_eat(t_tableinfo *tableinfo)
 int	check_if_dead(t_tableinfo *tableinfo)
 {
 	int		i;
-	time_t	time_starve;
+	time_t	time_death;
 	time_t	time_now;
 
 	time_now = get_t_simulation(tableinfo);
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{
-		time_starve = time_now - (tableinfo->philo_t_last_eat)[i];
-		if (time_starve > tableinfo->time_die)
+		if (time_now - (tableinfo->philo_t_last_eat)[i] > tableinfo->time_die)
 		{
-			printf("%ld %d died\n", time_now / 1000, i + 1);
+			time_death = (tableinfo->philo_t_last_eat)[i] + tableinfo->time_die;
+			printf("%ld %d died\n", time_death / 1000, i + 1);
 			return (1);
 		}
 		i++;
