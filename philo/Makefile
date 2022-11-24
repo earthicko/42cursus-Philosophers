@@ -16,6 +16,7 @@ SRCNAME			= \
 				initializer \
 				msg_queue \
 				msg_printer \
+				ft_usleep \
 				philosopher \
 				philo_strategy_0 \
 				philo_strategy_1 \
