@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "error_handler.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/time.h>
 
 time_t	get_t_simulation(t_tableinfo *info)
@@ -31,7 +33,8 @@ void	philo_push_msg(t_philoinfo *info, int msg)
 {
 	(info->buf).t_ms = get_t_simulation(info->tableinfo);
 	(info->buf).content = msg;
-	push_msg_queue(info->tableinfo->queue, &(info->buf));
+	if (push_msg_queue(info->tableinfo->queue, &(info->buf)))
+		exit(handle_error("Message queue full."));
 }
 
 void	*philo_start_routine(void *arg)
