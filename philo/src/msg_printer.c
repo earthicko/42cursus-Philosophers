@@ -18,6 +18,7 @@ void	flush_msg_queue(t_msg_queue *queue)
 {
 	t_msg	buf;
 
+	pthread_mutex_lock(&(queue->mutex));
 	while (queue->len > 0)
 	{
 		pop_msg_queue(queue, &buf);
@@ -31,4 +32,5 @@ void	flush_msg_queue(t_msg_queue *queue)
 		if (buf.content == THINKING)
 			printf("is thinking\n");
 	}
+	pthread_mutex_unlock(&(queue->mutex));
 }

@@ -13,8 +13,10 @@
 #ifndef MSG_QUEUE_H
 # define MSG_QUEUE_H
 # include <sys/time.h>
+# include <pthread.h>
 # define CODE_ERROR_MSG_QUEUE_FULL -1
 # define CODE_ERROR_MSG_QUEUE_EMPTY -2
+# define CODE_ERROR_MSG_QUEUE_MUTEX -3
 
 enum e_content
 {
@@ -34,10 +36,11 @@ typedef struct s_msg
 
 typedef struct s_msg_queue
 {
-	int		cap;
-	int		len;
-	int		head;
-	t_msg	*items;
+	pthread_mutex_t	mutex;
+	int				cap;
+	int				len;
+	int				head;
+	t_msg			*items;
 }	t_msg_queue;
 
 t_msg_queue	*create_msg_queue(int cap);

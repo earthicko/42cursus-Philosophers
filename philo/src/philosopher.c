@@ -33,8 +33,10 @@ void	philo_push_msg(t_philoinfo *info, int msg)
 {
 	(info->buf).t_ms = get_t_simulation(info->tableinfo);
 	(info->buf).content = msg;
+	pthread_mutex_lock(&(info->tableinfo->queue->mutex));
 	if (push_msg_queue(info->tableinfo->queue, &(info->buf)))
 		exit(handle_error("Message queue full."));
+	pthread_mutex_unlock(&(info->tableinfo->queue->mutex));
 }
 
 void	*philo_start_routine(void *arg)
