@@ -14,9 +14,6 @@
 # define MSG_QUEUE_H
 # include <sys/time.h>
 # include <pthread.h>
-# define CODE_ERROR_MSG_QUEUE_FULL -1
-# define CODE_ERROR_MSG_QUEUE_EMPTY -2
-# define CODE_ERROR_MSG_QUEUE_MUTEX -3
 
 enum e_content
 {

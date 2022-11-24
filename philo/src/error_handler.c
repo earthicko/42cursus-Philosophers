@@ -16,7 +16,7 @@
 int	handle_error(char *error_msg)
 {
 	printf("%s\n", error_msg);
-	return (CODE_ERROR);
+	return (-1);
 }
 
 int	print_usage(void)
