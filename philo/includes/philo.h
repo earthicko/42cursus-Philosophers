@@ -15,8 +15,8 @@
 # include "msg_queue.h"
 # include <pthread.h>
 # include <sys/time.h>
-# define T_PERIOD_LOOP_US 1000
-# define T_INITIAL_DELAY_US 100
+# define T_PERIOD_LOOP 10000
+# define T_INITIAL_DELAY 1000
 
 typedef pthread_t		t_thread;
 typedef pthread_mutex_t	t_mutex;
@@ -24,15 +24,15 @@ typedef pthread_mutex_t	t_mutex;
 typedef struct s_tableinfo
 {
 	int			n_philos;
-	time_t		time_die_ms;
-	time_t		time_eat_us;
-	time_t		time_slp_us;
+	time_t		time_die;
+	time_t		time_eat;
+	time_t		time_slp;
 	int			n_eats_until_done;
 	t_thread	*philo_ids;
 	int			*philo_n_eats;
-	time_t		*philo_t_last_eat_ms;
+	time_t		*philo_t_last_eat;
 	t_mutex		*fork_ids;
-	time_t		t_start_ms;
+	time_t		t_start;
 	t_msg_queue	*queue;
 }	t_tableinfo;
 

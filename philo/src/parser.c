@@ -21,13 +21,13 @@ static int	parse_times(char **argv, t_tableinfo *tinfo)
 
 	if (ft_atoi_if_valid(argv[2], &buffer) || buffer < 0)
 		return (-1);
-	tinfo->time_die_ms = buffer;
+	tinfo->time_die = buffer * 1000;
 	if (ft_atoi_if_valid(argv[3], &buffer) || buffer < 0)
 		return (-1);
-	tinfo->time_eat_us = buffer;
+	tinfo->time_eat = buffer * 1000;
 	if (ft_atoi_if_valid(argv[4], &buffer) || buffer < 0)
 		return (-1);
-	tinfo->time_slp_us = buffer;
+	tinfo->time_slp = buffer * 1000;
 	return (0);
 }
 
@@ -48,9 +48,7 @@ int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 		tinfo->n_eats_until_done = -1;
 	printf("N Philos              : %d\n", tinfo->n_philos);
 	printf("Time: die | eat | slp : %ld | %ld | %ld\n",
-		tinfo->time_die_ms, tinfo->time_eat_us, tinfo->time_slp_us);
+		tinfo->time_die, tinfo->time_eat, tinfo->time_slp);
 	printf("N eatings until done  : %d\n", tinfo->n_eats_until_done);
-	tinfo->time_eat_us *= 1000;
-	tinfo->time_slp_us *= 1000;
 	return (0);
 }

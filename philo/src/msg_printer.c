@@ -22,7 +22,7 @@ void	flush_msg_queue(t_msg_queue *queue)
 	while (queue->len > 0)
 	{
 		pop_msg_queue(queue, &buf);
-		printf("%ld %d ", buf.t_ms, buf.i);
+		printf("%ld %d ", buf.t / 1000, buf.i);
 		if (buf.content == FORKTAKEN)
 			printf("has taken a fork\n");
 		if (buf.content == EATING)

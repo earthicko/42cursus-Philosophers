@@ -48,8 +48,8 @@ int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos)
 	if (init_mutexes(tableinfo))
 		return (-1);
 	gettimeofday(&t, NULL);
-	tableinfo->t_start_ms = t.tv_sec * 1000 + t.tv_usec / 1000;
-	printf("Simulation start at %ld us\n", tableinfo->t_start_ms);
+	tableinfo->t_start = t.tv_sec * 1000000 + t.tv_usec;
+	printf("Simulation start at %ld us\n", tableinfo->t_start);
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{

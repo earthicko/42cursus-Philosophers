@@ -20,18 +20,18 @@
 time_t	get_t_simulation(t_tableinfo *info)
 {
 	struct timeval	t;
-	long long		temp;
+	time_t			temp;
 
 	gettimeofday(&t, NULL);
-	temp = t.tv_sec * 1000;
-	temp += t.tv_usec / 1000;
-	temp -= info->t_start_ms;
+	temp = t.tv_sec * 1000000;
+	temp += t.tv_usec;
+	temp -= info->t_start;
 	return (temp);
 }
 
 void	philo_push_msg(t_philoinfo *info, int msg)
 {
-	(info->buf).t_ms = get_t_simulation(info->tableinfo);
+	(info->buf).t = get_t_simulation(info->tableinfo);
 	(info->buf).content = msg;
 	pthread_mutex_lock(&(info->tableinfo->queue->mutex));
 	if (push_msg_queue(info->tableinfo->queue, &(info->buf)))

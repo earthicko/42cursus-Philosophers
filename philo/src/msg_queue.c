@@ -53,7 +53,7 @@ int	push_msg_queue(t_msg_queue *queue, t_msg *p_msg)
 		return (CODE_ERROR_MSG_QUEUE_FULL);
 	queue->len++;
 	i = (queue->head + queue->len) % queue->cap;
-	queue->items[i].t_ms = p_msg->t_ms;
+	queue->items[i].t = p_msg->t;
 	queue->items[i].i = p_msg->i;
 	queue->items[i].content = p_msg->content;
 	return (0);
@@ -65,7 +65,7 @@ int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 		return (CODE_ERROR_MSG_QUEUE_EMPTY);
 	queue->head = (queue->head + 1) % queue->cap;
 	queue->len--;
-	ret_msg->t_ms = queue->items[queue->head].t_ms;
+	ret_msg->t = queue->items[queue->head].t;
 	ret_msg->i = queue->items[queue->head].i;
 	ret_msg->content = queue->items[queue->head].content;
 	return (0);
