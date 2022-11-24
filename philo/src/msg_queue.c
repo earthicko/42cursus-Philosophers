@@ -24,8 +24,14 @@ t_msg_queue	*create_msg_queue(int cap)
 	queue->len = 0;
 	queue->head = 0;
 	queue->items = malloc(sizeof(t_msg) * cap);
-	if (!queue->items || pthread_mutex_init(&(queue->mutex), NULL))
+	if (!queue->items)
 	{
+		free(queue);
+		return (NULL);
+	}
+	if (pthread_mutex_init(&(queue->mutex), NULL))
+	{
+		free(queue->items);
 		free(queue);
 		return (NULL);
 	}
