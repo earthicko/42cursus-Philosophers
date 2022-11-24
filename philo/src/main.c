@@ -55,7 +55,7 @@ int	check_if_dead(t_tableinfo *tableinfo)
 	return (0);
 }
 
-int	loop_until_done(t_tableinfo *tableinfo)
+void	loop_until_done(t_tableinfo *tableinfo)
 {
 	while (1)
 	{
@@ -63,10 +63,10 @@ int	loop_until_done(t_tableinfo *tableinfo)
 		{
 			printf("All philosophers have eat %d times. Stopping Simulation.\n",
 				tableinfo->n_eats_until_done);
-			return (0);
+			return ;
 		}
 		if (check_if_dead(tableinfo))
-			return (0);
+			return ;
 		flush_msg_queue(tableinfo->queue);
 		usleep(T_PERIOD_LOOP_US);
 	}
@@ -91,5 +91,7 @@ int	main(int argc, char **argv)
 		free(philoinfos);
 		return (handle_error("Error while initializing threads or mutexes."));
 	}
-	return (loop_until_done(&tableinfo));
+	loop_until_done(&tableinfo);
+	free_tableinfo(&tableinfo);
+	return (0);
 }
