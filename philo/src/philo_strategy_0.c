@@ -12,6 +12,7 @@
 
 #include "philo.h"
 #include "msg_queue.h"
+#include "ft_usleep.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
@@ -21,7 +22,7 @@ static void	philo_eat(t_philoinfo *info)
 	philo_push_msg(info, EATING);
 	(info->tableinfo->philo_t_last_eat)[info->i] = (info->buf).t;
 	(info->tableinfo->philo_n_eats)[info->i]++;
-	usleep(info->tableinfo->time_eat);
+	ft_usleep(info->tableinfo->time_eat);
 	pthread_mutex_unlock(info->forks[0]);
 	pthread_mutex_unlock(info->forks[1]);
 }
@@ -29,7 +30,7 @@ static void	philo_eat(t_philoinfo *info)
 static void	philo_sleep(t_philoinfo *info)
 {
 	philo_push_msg(info, SLEEPING);
-	usleep(info->tableinfo->time_slp);
+	ft_usleep(info->tableinfo->time_slp);
 }
 
 static void	philo_think_odd(t_philoinfo *info)
@@ -58,7 +59,7 @@ static void	philo_think_even(t_philoinfo *info)
 void	philo_strategy_0(t_philoinfo *info)
 {
 	if (info->i % 2)
-		usleep(T_INITIAL_DELAY);
+		ft_usleep(T_INITIAL_DELAY);
 	while (1)
 	{
 		if (info->i % 2)
