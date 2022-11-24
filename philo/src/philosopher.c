@@ -47,8 +47,8 @@ void	*philo_start_routine(void *arg)
 	(info->buf).i = info->i + 1;
 	pthread_detach((info->tableinfo->philo_ids)[info->i]);
 	if (info->tableinfo->n_philos % 2 == 0)
-		philo_strategy_2(info);
+		philo_strategy_even(info);
 	else
-		philo_strategy_1(info);
+		philo_strategy_even(info);
 	return (NULL);
 }

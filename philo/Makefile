@@ -18,9 +18,8 @@ SRCNAME			= \
 				msg_printer \
 				ft_usleep \
 				philosopher \
-				philo_strategy_0 \
-				philo_strategy_1 \
-				philo_strategy_2
+				philo_strategy_odd \
+				philo_strategy_even
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))

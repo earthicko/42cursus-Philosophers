@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_strategy_1.c                                 :+:      :+:    :+:   */
+/*   philo_strategy_even.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyle <donghyle@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -42,29 +42,27 @@ static void	philo_think(t_philoinfo *info)
 	philo_push_msg(info, FORKTAKEN);
 }
 
-// strategy suitable for odd number of philos
-// each philo will add a small delay every Nth cycle of their lives.
-// philo n will start adding their delay from nth cycle.
-// every philo will pick their forks from left to right.
-// if counter is at 0, add delay.
-// else if counter is even, sleep.
-// else, eat.
-void	philo_strategy_1(t_philoinfo *info)
+// strategy suitable for even number of philos
+// philo with n % 2 == 1 will think, eat and sleep.
+// philo with n % 2 == 0 will sleep, think and eat.
+void	philo_strategy_even(t_philoinfo *info)
 {
-	int	counter;
-
-	counter = info->i;
-	while (1)
+	if (info->i % 2)
 	{
-		if (counter == 0)
-			ft_usleep(T_INITIAL_DELAY);
-		else if (counter % 2)
+		while (1)
 		{
 			philo_think(info);
 			philo_eat(info);
-		}
-		else
 			philo_sleep(info);
-		counter = (counter + 1) % info->tableinfo->n_philos;
+		}
+	}
+	else
+	{
+		while (1)
+		{
+			philo_sleep(info);
+			philo_think(info);
+			philo_eat(info);
+		}
 	}
 }

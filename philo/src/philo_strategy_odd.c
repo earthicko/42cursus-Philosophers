@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_strategy_0.c                                 :+:      :+:    :+:   */
+/*   philo_strategy_odd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyle <donghyle@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,7 +33,7 @@ static void	philo_sleep(t_philoinfo *info)
 	ft_usleep(info->tableinfo->time_slp);
 }
 
-static void	philo_think_odd(t_philoinfo *info)
+static void	philo_think(t_philoinfo *info)
 {
 	philo_push_msg(info, THINKING);
 	pthread_mutex_lock(info->forks[0]);
@@ -42,31 +42,29 @@ static void	philo_think_odd(t_philoinfo *info)
 	philo_push_msg(info, FORKTAKEN);
 }
 
-static void	philo_think_even(t_philoinfo *info)
+// strategy suitable for odd number of philos
+// each philo will add a small delay every Nth cycle of their lives.
+// philo n will start adding their delay from nth cycle.
+// every philo will pick their forks from left to right.
+// if counter is at 0, add delay.
+// else if counter is even, sleep.
+// else, eat.
+void	philo_strategy_odd(t_philoinfo *info)
 {
-	philo_push_msg(info, THINKING);
-	pthread_mutex_lock(info->forks[1]);
-	philo_push_msg(info, FORKTAKEN);
-	pthread_mutex_lock(info->forks[0]);
-	philo_push_msg(info, FORKTAKEN);
-}
+	int	counter;
 
-// strategy suitable for even number of philos
-// philo with n % 2 == 1 will pick fork on their left then right,
-// n % 2 == 0 vise versa.
-// philo with n % 2 == 1 will also start picking forks a little later
-// to allow n % 2 == 0 to have meal first.
-void	philo_strategy_0(t_philoinfo *info)
-{
-	if (info->i % 2)
-		ft_usleep(T_INITIAL_DELAY);
+	counter = info->i;
 	while (1)
 	{
-		if (info->i % 2)
-			philo_think_odd(info);
+		if (counter == 0)
+			ft_usleep(T_INITIAL_DELAY);
+		else if (counter % 2)
+		{
+			philo_think(info);
+			philo_eat(info);
+		}
 		else
-			philo_think_even(info);
-		philo_eat(info);
-		philo_sleep(info);
+			philo_sleep(info);
+		counter = (counter + 1) % info->tableinfo->n_philos;
 	}
 }

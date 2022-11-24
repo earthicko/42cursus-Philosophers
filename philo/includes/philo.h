@@ -49,6 +49,6 @@ void	*philo_start_routine(void *arg);
 void	philo_push_msg(t_philoinfo *info, int msg);
 
 void	philo_strategy_0(t_philoinfo *info);
-void	philo_strategy_1(t_philoinfo *info);
-void	philo_strategy_2(t_philoinfo *info);
+void	philo_strategy_even(t_philoinfo *info);
+void	philo_strategy_even(t_philoinfo *info);
 #endif
