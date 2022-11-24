@@ -13,9 +13,8 @@
 #include "philo.h"
 #include "error_handler.h"
 #include "parser.h"
-#include "allocator.h"
-#include "initializer.h"
-#include "msg_printer.h"
+#include "t_info.h"
+#include "msg_queue.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>

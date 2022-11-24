@@ -12,6 +12,7 @@
 
 #include "msg_queue.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 t_msg_queue	*create_msg_queue(int cap)
 {
@@ -69,4 +70,25 @@ int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 	ret_msg->i = queue->items[queue->head].i;
 	ret_msg->content = queue->items[queue->head].content;
 	return (0);
+}
+
+void	flush_msg_queue(t_msg_queue *queue)
+{
+	t_msg	buf;
+
+	pthread_mutex_lock(&(queue->mutex));
+	while (queue->len > 0)
+	{
+		pop_msg_queue(queue, &buf);
+		printf("%ld %d ", buf.t / 1000, buf.i);
+		if (buf.content == FORKTAKEN)
+			printf("has taken a fork\n");
+		if (buf.content == EATING)
+			printf("is eating\n");
+		if (buf.content == SLEEPING)
+			printf("is sleeping\n");
+		if (buf.content == THINKING)
+			printf("is thinking\n");
+	}
+	pthread_mutex_unlock(&(queue->mutex));
 }

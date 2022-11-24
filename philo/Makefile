@@ -8,18 +8,16 @@ CFLAGS			= -Wall -Werror -Wextra -MMD -MP
 ################################ FILENAMES #####################################
 SRCNAME			= \
 				main \
-				ft_asciitools2 \
+				ft_asciitools \
 				ft_atoi \
+				timetools \
+				msg_queue \
 				error_handler \
 				parser \
-				allocator \
-				initializer \
-				msg_queue \
-				msg_printer \
-				ft_usleep \
-				philosopher \
-				philo_strategy_odd \
-				philo_strategy_even
+				t_info_allocator \
+				t_info_initializer \
+				philo_actions \
+				philosopher
 
 SRC				= $(addprefix src/, $(addsuffix .c, $(SRCNAME)))
 OBJ				= $(addprefix src/, $(addsuffix .o, $(SRCNAME)))
