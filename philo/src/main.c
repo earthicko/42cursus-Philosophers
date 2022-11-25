@@ -60,15 +60,15 @@ void	loop_until_done(t_tableinfo *tableinfo)
 {
 	while (1)
 	{
+		flush_msg_queue(tableinfo->queue);
+		if (check_if_dead(tableinfo))
+			return ;
 		if (tableinfo->n_eats_until_done >= 0 && check_if_all_eat(tableinfo))
 		{
 			printf("All philosophers have eat %d times. Stopping Simulation.\n",
 				tableinfo->n_eats_until_done);
 			return ;
 		}
-		if (check_if_dead(tableinfo))
-			return ;
-		flush_msg_queue(tableinfo->queue);
 		usleep(T_PERIOD_LOOP);
 	}
 }
