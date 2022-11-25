@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "t_info.h"
+#include "timetools.h"
 #include <unistd.h>
 #include <sys/time.h>
 
-int	ft_usleep(useconds_t microseconds)
+int	ft_usleep(useconds_t microseconds, suseconds_t check_period)
 {
 	struct timeval	start;
 	struct timeval	now;
@@ -23,7 +24,7 @@ int	ft_usleep(useconds_t microseconds)
 	gettimeofday(&start, NULL);
 	while (1)
 	{
-		if (usleep(1))
+		if (usleep(check_period))
 			return (-1);
 		gettimeofday(&now, NULL);
 		elapsed = (now.tv_sec - start.tv_sec) * 1000000;

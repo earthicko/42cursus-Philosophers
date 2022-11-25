@@ -16,6 +16,6 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-int		ft_usleep(useconds_t microseconds);
+int		ft_usleep(useconds_t microseconds, suseconds_t check_period);
 time_t	get_t_simulation(t_tableinfo *info);
 #endif

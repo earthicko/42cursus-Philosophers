@@ -43,7 +43,7 @@ void	philo_strategy_odd(t_philoinfo *info)
 	while (1)
 	{
 		if (counter == 0)
-			ft_usleep(T_INITIAL_DELAY);
+			ft_usleep(T_INITIAL_DELAY, info->tableinfo->n_philos / 2);
 		else if (counter % 2)
 		{
 			philo_think(info);
