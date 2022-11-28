@@ -17,6 +17,8 @@
 
 int	free_tableinfo(t_tableinfo *tableinfo)
 {
+	int	i;
+
 	if (tableinfo->philo_ids)
 		free(tableinfo->philo_ids);
 	if (tableinfo->philo_n_eats)
@@ -25,6 +27,15 @@ int	free_tableinfo(t_tableinfo *tableinfo)
 		free(tableinfo->philo_t_last_eat);
 	if (tableinfo->fork_ids)
 		free(tableinfo->fork_ids);
+	if (tableinfo->fork_ids)
+	{
+		i = 0;
+		while (i < tableinfo->n_philos)
+		{
+			pthread_mutex_destroy(tableinfo->fork_ids + i);
+			i++;
+		}
+	}
 	if (tableinfo->queue)
 		destroy_msg_queue(tableinfo->queue);
 	return (-1);
