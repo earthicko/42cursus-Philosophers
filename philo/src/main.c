@@ -94,5 +94,6 @@ int	main(int argc, char **argv)
 	}
 	loop_until_done(&tableinfo);
 	free_tableinfo(&tableinfo);
+	free(philoinfos);
 	return (0);
 }
