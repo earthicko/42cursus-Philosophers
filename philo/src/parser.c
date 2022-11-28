@@ -15,7 +15,7 @@
 #include <string.h>
 #include <stdio.h>
 
-static int	parse_times(char **argv, t_tableinfo *tinfo)
+static int	parse_times(int argc, char **argv, t_tableinfo *tinfo)
 {
 	int	buffer;
 
@@ -28,24 +28,24 @@ static int	parse_times(char **argv, t_tableinfo *tinfo)
 	if (ft_atoi_if_valid(argv[4], &buffer) || buffer < 0)
 		return (-1);
 	tinfo->time_slp = buffer * 1000;
+	if (argc == 6)
+	{
+		if (ft_atoi_if_valid(argv[5], &buffer) || buffer < 0)
+			return (-1);
+		tinfo->n_eats_until_done = buffer * 1000;
+	}
+	else
+		tinfo->n_eats_until_done = -1;
 	return (0);
 }
 
 int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 {
 	memset(tinfo, 0, sizeof(t_tableinfo));
-	if (parse_times(argv, tinfo))
-		return (-1);
 	if (ft_atoi_if_valid(argv[1], &tinfo->n_philos) || tinfo->n_philos < 1)
 		return (-1);
-	if (argc == 6)
-	{
-		if (ft_atoi_if_valid(argv[5], &tinfo->n_eats_until_done)
-			|| tinfo->n_eats_until_done < 0)
-			return (-1);
-	}
-	else
-		tinfo->n_eats_until_done = -1;
+	if (parse_times(argc, argv, tinfo))
+		return (-1);
 	printf("N Philos              : %d\n", tinfo->n_philos);
 	printf("Time: die | eat | slp : %ld | %ld | %ld\n",
 		tinfo->time_die, tinfo->time_eat, tinfo->time_slp);
