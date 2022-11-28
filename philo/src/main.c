@@ -47,7 +47,7 @@ int	check_if_dead(t_tableinfo *tableinfo)
 	{
 		now_us = get_t_simulation(tableinfo);
 		elapsed_ms = (now_us - (tableinfo->philo_t_last_eat)[i]) / 1000;
-		if (elapsed_ms > tableinfo->time_die * 1000)
+		if (elapsed_ms * 1000 > tableinfo->time_die)
 		{
 			death_us = (tableinfo->philo_t_last_eat)[i] + tableinfo->time_die;
 			printf("%ld %d died\n", death_us / 1000, i + 1);
