@@ -41,10 +41,10 @@ int	check_if_dead(t_tableinfo *tableinfo)
 	time_t	time_death;
 	time_t	time_now;
 
-	time_now = get_t_simulation(tableinfo);
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{
+		time_now = get_t_simulation(tableinfo);
 		if (time_now - (tableinfo->philo_t_last_eat)[i] > tableinfo->time_die)
 		{
 			time_death = (tableinfo->philo_t_last_eat)[i] + tableinfo->time_die;
