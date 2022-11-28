@@ -29,7 +29,7 @@ int	ft_usleep(useconds_t microseconds, suseconds_t check_period)
 		gettimeofday(&now, NULL);
 		elapsed = (now.tv_sec - start.tv_sec) * 1000000;
 		elapsed += (now.tv_usec - start.tv_usec);
-		if (elapsed >= microseconds)
+		if (elapsed >= (time_t) microseconds)
 			return (0);
 	}
 	return (0);
