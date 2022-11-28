@@ -32,7 +32,7 @@ static int	parse_times(int argc, char **argv, t_tableinfo *tinfo)
 	{
 		if (ft_atoi_if_valid(argv[5], &buffer) || buffer < 0)
 			return (-1);
-		tinfo->n_eats_until_done = buffer * 1000;
+		tinfo->n_eats_until_done = buffer;
 	}
 	else
 		tinfo->n_eats_until_done = -1;
