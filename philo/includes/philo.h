@@ -14,7 +14,6 @@
 # define PHILO_H
 # include "t_info.h"
 # include <sys/time.h>
-# define T_PERIOD_LOOP 5000
 # define T_INITIAL_DELAY 100
 
 time_t	get_t_simulation(t_tableinfo *info);

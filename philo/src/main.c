@@ -71,7 +71,6 @@ void	loop_until_done(t_tableinfo *tableinfo)
 				tableinfo->n_eats_until_done);
 			return ;
 		}
-		usleep(T_PERIOD_LOOP);
 	}
 }
 
