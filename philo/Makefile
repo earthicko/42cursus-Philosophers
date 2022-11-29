@@ -12,7 +12,6 @@ SRCNAME			= \
 				ft_atoi \
 				timetools \
 				msg_queue \
-				error_handler \
 				parser \
 				t_info_allocator \
 				t_info_initializer \

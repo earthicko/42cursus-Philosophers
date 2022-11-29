@@ -21,6 +21,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int	handle_error(char *error_msg)
+{
+	printf("%s\n", error_msg);
+	return (1);
+}
+
 int	check_if_all_eat(t_tableinfo *tableinfo)
 {
 	int	i;
