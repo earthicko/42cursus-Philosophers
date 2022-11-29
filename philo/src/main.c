@@ -72,11 +72,7 @@ void	loop_until_done(t_tableinfo *tableinfo)
 		if (check_if_dead(tableinfo))
 			return ;
 		if (tableinfo->n_eats_until_done >= 0 && check_if_all_eat(tableinfo))
-		{
-			printf("All philosophers have eat %d times. Stopping Simulation.\n",
-				tableinfo->n_eats_until_done);
 			return ;
-		}
 	}
 }
 
@@ -85,8 +81,6 @@ int	main(int argc, char **argv)
 	t_tableinfo	tableinfo;
 	t_philoinfo	*philoinfos;
 
-	if (argc == 1)
-		return (print_usage());
 	if (!(argc == 5 || argc == 6))
 		return (handle_error("Invalid number of arguments."));
 	if (parse_args(argc, argv, &tableinfo))

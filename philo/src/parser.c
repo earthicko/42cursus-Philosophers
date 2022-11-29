@@ -46,9 +46,5 @@ int	parse_args(int argc, char **argv, t_tableinfo *tinfo)
 		return (-1);
 	if (parse_times(argc, argv, tinfo))
 		return (-1);
-	printf("N Philos              : %d\n", tinfo->n_philos);
-	printf("Time: die | eat | slp : %ld | %ld | %ld\n",
-		tinfo->time_die, tinfo->time_eat, tinfo->time_slp);
-	printf("N eatings until done  : %d\n", tinfo->n_eats_until_done);
 	return (0);
 }
