@@ -13,8 +13,8 @@ SRCNAME			= \
 				timetools \
 				msg_queue \
 				parser \
-				t_info_allocator \
-				t_info_initializer \
+				simulation_allocator \
+				simulation_initializer \
 				philo_actions \
 				philosopher
 
