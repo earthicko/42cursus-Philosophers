@@ -32,9 +32,10 @@ typedef struct s_table
 {
 	int			n_philos;
 	t_thread	*philo_ids;
+	t_mutex		*fork_ids;
 	int			*philo_n_eats;
 	time_t		*philo_t_last_eat;
-	t_mutex		*fork_ids;
+	t_mutex		*lock_infos;
 	t_msg_queue	*queue;
 }	t_table;
 
@@ -47,6 +48,7 @@ typedef struct s_philo
 	t_mutex	*forks[2];
 }	t_philo;
 
+int	destroy_mutexes(t_mutex *mutexarr, int n);
 int	free_table(t_table *table);
 int	alloc_table(t_table *table);
 int	alloc_philos(t_table *table, t_env *env, t_philo **philos);

@@ -16,15 +16,11 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-static int	abort_init_mutexes(t_table *table, int i)
+static int	abort_init_mutexes(t_table *table)
 {
-	while (1)
-	{
-		i--;
-		if (i < 0)
-			return (-1);
-		pthread_mutex_destroy(table->fork_ids + i);
-	}
+	destroy_mutexes(table->fork_ids, table->n_philos);
+	destroy_mutexes(table->lock_infos, table->n_philos);
+	return (-1);
 }
 
 int	init_mutexes(t_table *table)
@@ -35,7 +31,9 @@ int	init_mutexes(t_table *table)
 	while (i < table->n_philos)
 	{
 		if (pthread_mutex_init(table->fork_ids + i, NULL))
-			return (abort_init_mutexes(table, i));
+			return (abort_init_mutexes(table));
+		if (pthread_mutex_init(table->lock_infos + i, NULL))
+			return (abort_init_mutexes(table));
 		i++;
 	}
 	return (0);
