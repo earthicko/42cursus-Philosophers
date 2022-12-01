@@ -22,10 +22,8 @@ void	philo_push_msg(t_philo *philo, int msg)
 {
 	(philo->buf).t = get_t_simulation(philo->env);
 	(philo->buf).content = msg;
-	pthread_mutex_lock(&(philo->table->queue->mutex));
 	if (push_msg_queue(philo->table->queue, &(philo->buf)))
 		exit(handle_error("Message queue full."));
-	pthread_mutex_unlock(&(philo->table->queue->mutex));
 }
 
 // strategy suitable for odd number of philos

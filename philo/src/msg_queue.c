@@ -53,11 +53,13 @@ int	push_msg_queue(t_msg_queue *queue, t_msg *p_msg)
 
 	if (queue->len == queue->cap)
 		return (-1);
+	pthread_mutex_lock(&(queue->mutex));
 	queue->len++;
 	i = (queue->head + queue->len) % queue->cap;
 	queue->items[i].t = p_msg->t;
 	queue->items[i].i = p_msg->i;
 	queue->items[i].content = p_msg->content;
+	pthread_mutex_unlock(&(queue->mutex));
 	return (0);
 }
 
@@ -65,11 +67,13 @@ int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 {
 	if (queue->len == 0)
 		return (-1);
+	pthread_mutex_lock(&(queue->mutex));
 	queue->head = (queue->head + 1) % queue->cap;
 	queue->len--;
 	ret_msg->t = queue->items[queue->head].t;
 	ret_msg->i = queue->items[queue->head].i;
 	ret_msg->content = queue->items[queue->head].content;
+	pthread_mutex_unlock(&(queue->mutex));
 	return (0);
 }
 
@@ -77,7 +81,6 @@ void	flush_msg_queue(t_msg_queue *queue)
 {
 	t_msg	buf;
 
-	pthread_mutex_lock(&(queue->mutex));
 	while (queue->len > 0)
 	{
 		pop_msg_queue(queue, &buf);
@@ -91,5 +94,4 @@ void	flush_msg_queue(t_msg_queue *queue)
 		if (buf.content == THINKING)
 			printf("is thinking\n");
 	}
-	pthread_mutex_unlock(&(queue->mutex));
 }
