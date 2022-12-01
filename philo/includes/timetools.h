@@ -12,7 +12,7 @@
 
 #ifndef TIMETOOLS_H
 # define TIMETOOLS_H
-# include "t_info.h"
+# include "simulation.h"
 # include <unistd.h>
 # include <sys/time.h>
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_info.h"
+#include "simulation.h"
 #include "msg_queue.h"
 #include <stdlib.h>
 #include <string.h>
@@ -60,38 +60,35 @@ int	alloc_table(t_table *table)
 	return (0);
 }
 
-int	alloc_philos(t_table *tableinfo, t_env *env, t_philo **philoinfos)
+int	alloc_philos(t_table *table, t_env *env, t_philo **philos)
 {
 	int	i;
 	int	n;
 
-	n = tableinfo->n_philos;
-	*philoinfos = malloc(sizeof(t_philo) * n);
-	if (!(*philoinfos))
+	n = table->n_philos;
+	*philos = malloc(sizeof(t_philo) * n);
+	if (!(*philos))
 		return (-1);
 	i = 0;
 	while (i < n)
 	{
-		(*philoinfos)[i].table = tableinfo;
-		(*philoinfos)[i].env = env;
-		(*philoinfos)[i].i = i;
-		(*philoinfos)[i].forks[0] = tableinfo->fork_ids + i;
-		(*philoinfos)[i].forks[1] = tableinfo->fork_ids + ((i + 1) % n);
+		(*philos)[i].table = table;
+		(*philos)[i].env = env;
+		(*philos)[i].i = i;
+		(*philos)[i].forks[0] = table->fork_ids + i;
+		(*philos)[i].forks[1] = table->fork_ids + ((i + 1) % n);
 		i++;
 	}
 	return (0);
 }
 
-int	alloc_players(
-	t_table *tableinfo,
-	t_env *env,
-	t_philo **philoinfos)
+int	alloc_players(t_table *table, t_env *env, t_philo **philos)
 {
-	if (alloc_table(tableinfo))
+	if (alloc_table(table))
 		return (-1);
-	if (alloc_philos(tableinfo, env, philoinfos))
+	if (alloc_philos(table, env, philos))
 	{
-		free_table(tableinfo);
+		free_table(table);
 		return (-1);
 	}
 	return (0);

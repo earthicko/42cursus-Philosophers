@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_info.h"
+#include "simulation.h"
 #include "timetools.h"
 #include <unistd.h>
 #include <sys/time.h>

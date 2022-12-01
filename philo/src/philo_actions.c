@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_info.h"
+#include "simulation.h"
 #include "philo.h"
 #include "timetools.h"
 #include <pthread.h>

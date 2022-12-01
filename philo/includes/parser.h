@@ -12,7 +12,7 @@
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "t_info.h"
+# include "simulation.h"
 
-int	parse_args(int argc, char **argv, t_env *env, t_table *tinfo);
+int	parse_args(int argc, char **argv, t_env *env, t_table *table);
 #endif

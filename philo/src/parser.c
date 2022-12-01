@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_info.h"
+#include "simulation.h"
 #include "ft_atoi.h"
 #include <string.h>
 #include <stdio.h>

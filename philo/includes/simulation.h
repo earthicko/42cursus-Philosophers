@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_info.h                                           :+:      :+:    :+:   */
+/*   simulation.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: donghyle <donghyle@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_INFO_H
-# define T_INFO_H
+#ifndef SIMULATION_H
+# define SIMULATION_H
 # include "msg_queue.h"
 # include <sys/time.h>
 # include <pthread.h>
