@@ -17,5 +17,5 @@
 # include <sys/time.h>
 
 int		ft_usleep(useconds_t microseconds, suseconds_t check_period);
-time_t	get_t_simulation(t_tableinfo *info);
+time_t	get_t_simulation(t_env *env);
 #endif

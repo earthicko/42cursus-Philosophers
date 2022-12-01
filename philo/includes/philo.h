@@ -16,11 +16,10 @@
 # include <sys/time.h>
 # define T_INITIAL_DELAY 100
 
-time_t	get_t_simulation(t_tableinfo *info);
 void	*philo_start_routine(void *arg);
-void	philo_push_msg(t_philoinfo *info, int msg);
+void	philo_push_msg(t_philo *info, int msg);
 
-void	philo_eat(t_philoinfo *info);
-void	philo_sleep(t_philoinfo *info);
-void	philo_think(t_philoinfo *info);
+void	philo_eat(t_philo *info);
+void	philo_sleep(t_philo *info);
+void	philo_think(t_philo *info);
 #endif

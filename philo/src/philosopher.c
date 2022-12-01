@@ -18,14 +18,14 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-void	philo_push_msg(t_philoinfo *info, int msg)
+void	philo_push_msg(t_philo *philo, int msg)
 {
-	(info->buf).t = get_t_simulation(info->tableinfo);
-	(info->buf).content = msg;
-	pthread_mutex_lock(&(info->tableinfo->queue->mutex));
-	if (push_msg_queue(info->tableinfo->queue, &(info->buf)))
+	(philo->buf).t = get_t_simulation(philo->env);
+	(philo->buf).content = msg;
+	pthread_mutex_lock(&(philo->table->queue->mutex));
+	if (push_msg_queue(philo->table->queue, &(philo->buf)))
 		exit(handle_error("Message queue full."));
-	pthread_mutex_unlock(&(info->tableinfo->queue->mutex));
+	pthread_mutex_unlock(&(philo->table->queue->mutex));
 }
 
 // strategy suitable for odd number of philos
@@ -35,61 +35,61 @@ void	philo_push_msg(t_philoinfo *info, int msg)
 // if counter is at 0, add delay.
 // else if counter is even, sleep.
 // else, eat.
-void	philo_strategy_odd(t_philoinfo *info)
+void	philo_strategy_odd(t_philo *philo)
 {
 	int	counter;
 
-	counter = info->i;
+	counter = philo->i;
 	while (1)
 	{
 		if (counter == 0)
-			ft_usleep(T_INITIAL_DELAY, info->tableinfo->n_philos / 2);
+			ft_usleep(T_INITIAL_DELAY, philo->table->n_philos / 2);
 		else if (counter % 2)
 		{
-			philo_think(info);
-			philo_eat(info);
+			philo_think(philo);
+			philo_eat(philo);
 		}
 		else
-			philo_sleep(info);
-		counter = (counter + 1) % info->tableinfo->n_philos;
+			philo_sleep(philo);
+		counter = (counter + 1) % philo->table->n_philos;
 	}
 }
 
 // strategy suitable for even number of philos
 // philo with n % 2 == 1 will think, eat and sleep.
 // philo with n % 2 == 0 will sleep, think and eat.
-void	philo_strategy_even(t_philoinfo *info)
+void	philo_strategy_even(t_philo *philo)
 {
-	if (info->i % 2)
+	if (philo->i % 2)
 	{
 		while (1)
 		{
-			philo_think(info);
-			philo_eat(info);
-			philo_sleep(info);
+			philo_think(philo);
+			philo_eat(philo);
+			philo_sleep(philo);
 		}
 	}
 	else
 	{
 		while (1)
 		{
-			philo_sleep(info);
-			philo_think(info);
-			philo_eat(info);
+			philo_sleep(philo);
+			philo_think(philo);
+			philo_eat(philo);
 		}
 	}
 }
 
 void	*philo_start_routine(void *arg)
 {
-	t_philoinfo		*info;
+	t_philo		*philo;
 
-	info = arg;
-	(info->buf).i = info->i + 1;
-	pthread_detach((info->tableinfo->philo_ids)[info->i]);
-	if (info->tableinfo->n_philos % 2 == 0)
-		philo_strategy_even(info);
+	philo = arg;
+	(philo->buf).i = philo->i + 1;
+	pthread_detach((philo->table->philo_ids)[philo->i]);
+	if (philo->table->n_philos % 2 == 0)
+		philo_strategy_even(philo);
 	else
-		philo_strategy_odd(info);
+		philo_strategy_odd(philo);
 	return (NULL);
 }

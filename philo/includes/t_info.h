@@ -19,32 +19,37 @@
 typedef pthread_t		t_thread;
 typedef pthread_mutex_t	t_mutex;
 
-typedef struct s_tableinfo
+typedef struct s_env
+{
+	time_t	time_die;
+	time_t	time_eat;
+	time_t	time_slp;
+	time_t	t_start;
+	int		n_eats_until_done;
+}	t_env;
+
+typedef struct s_table
 {
 	int			n_philos;
-	time_t		time_die;
-	time_t		time_eat;
-	time_t		time_slp;
-	int			n_eats_until_done;
 	t_thread	*philo_ids;
 	int			*philo_n_eats;
 	time_t		*philo_t_last_eat;
 	t_mutex		*fork_ids;
-	time_t		t_start;
 	t_msg_queue	*queue;
-}	t_tableinfo;
+}	t_table;
 
-typedef struct s_philoinfo
+typedef struct s_philo
 {
-	t_msg		buf;
-	t_tableinfo	*tableinfo;
-	int			i;
-	t_mutex		*forks[2];
-}	t_philoinfo;
+	t_msg	buf;
+	t_table	*table;
+	t_env	*env;
+	int		i;
+	t_mutex	*forks[2];
+}	t_philo;
 
-int	free_tableinfo(t_tableinfo *tableinfo);
-int	alloc_tableinfo(t_tableinfo *tableinfo);
-int	alloc_philoinfos(t_philoinfo **philoinfos, t_tableinfo *tableinfo);
-int	alloc_infos(t_tableinfo *tableinfo, t_philoinfo **philoinfos);
-int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos);
+int	free_table(t_table *table);
+int	alloc_table(t_table *table);
+int	alloc_philos(t_table *table, t_env *env, t_philo **philos);
+int	alloc_players(t_table *table, t_env *env, t_philo **philos);
+int	init_simulation(t_table *table, t_env *env, t_philo *philos);
 #endif

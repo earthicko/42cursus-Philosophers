@@ -14,5 +14,5 @@
 # define PARSER_H
 # include "t_info.h"
 
-int	parse_args(int argc, char **argv, t_tableinfo *tinfo);
+int	parse_args(int argc, char **argv, t_env *env, t_table *tinfo);
 #endif

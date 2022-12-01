@@ -16,7 +16,7 @@
 #include <sys/time.h>
 #include <stdio.h>
 
-static int	abort_init_mutexes(t_tableinfo *tableinfo, int i)
+static int	abort_init_mutexes(t_table *tableinfo, int i)
 {
 	while (1)
 	{
@@ -27,7 +27,7 @@ static int	abort_init_mutexes(t_tableinfo *tableinfo, int i)
 	}
 }
 
-int	init_mutexes(t_tableinfo *tableinfo)
+int	init_mutexes(t_table *tableinfo)
 {
 	int	i;
 
@@ -41,7 +41,10 @@ int	init_mutexes(t_tableinfo *tableinfo)
 	return (0);
 }
 
-int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos)
+int	init_simulation(
+	t_table *tableinfo,
+	t_env *env,
+	t_philo *philoinfos)
 {
 	int				i;
 	struct timeval	t;
@@ -49,7 +52,7 @@ int	init_tableinfo(t_tableinfo *tableinfo, t_philoinfo *philoinfos)
 	if (init_mutexes(tableinfo))
 		return (-1);
 	gettimeofday(&t, NULL);
-	tableinfo->t_start = t.tv_sec * 1000000 + t.tv_usec;
+	env->t_start = t.tv_sec * 1000000 + t.tv_usec;
 	i = 0;
 	while (i < tableinfo->n_philos)
 	{

@@ -35,7 +35,7 @@ int	ft_usleep(useconds_t microseconds, suseconds_t check_period)
 	return (0);
 }
 
-time_t	get_t_simulation(t_tableinfo *info)
+time_t	get_t_simulation(t_env *env)
 {
 	struct timeval	t;
 	time_t			temp;
@@ -43,6 +43,6 @@ time_t	get_t_simulation(t_tableinfo *info)
 	gettimeofday(&t, NULL);
 	temp = t.tv_sec * 1000000;
 	temp += t.tv_usec;
-	temp -= info->t_start;
+	temp -= env->t_start;
 	return (temp);
 }

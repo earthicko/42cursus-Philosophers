@@ -15,27 +15,27 @@
 #include "timetools.h"
 #include <pthread.h>
 
-void	philo_eat(t_philoinfo *info)
+void	philo_eat(t_philo *philo)
 {
-	philo_push_msg(info, EATING);
-	(info->tableinfo->philo_t_last_eat)[info->i] = (info->buf).t;
-	ft_usleep(info->tableinfo->time_eat, info->tableinfo->n_philos / 2);
-	pthread_mutex_unlock(info->forks[0]);
-	pthread_mutex_unlock(info->forks[1]);
-	(info->tableinfo->philo_n_eats)[info->i]++;
+	philo_push_msg(philo, EATING);
+	(philo->table->philo_t_last_eat)[philo->i] = (philo->buf).t;
+	ft_usleep(philo->env->time_eat, philo->table->n_philos / 2);
+	pthread_mutex_unlock(philo->forks[0]);
+	pthread_mutex_unlock(philo->forks[1]);
+	(philo->table->philo_n_eats)[philo->i]++;
 }
 
-void	philo_sleep(t_philoinfo *info)
+void	philo_sleep(t_philo *philo)
 {
-	philo_push_msg(info, SLEEPING);
-	ft_usleep(info->tableinfo->time_slp, info->tableinfo->n_philos / 2);
+	philo_push_msg(philo, SLEEPING);
+	ft_usleep(philo->env->time_slp, philo->table->n_philos / 2);
 }
 
-void	philo_think(t_philoinfo *info)
+void	philo_think(t_philo *philo)
 {
-	philo_push_msg(info, THINKING);
-	pthread_mutex_lock(info->forks[0]);
-	philo_push_msg(info, FORKTAKEN);
-	pthread_mutex_lock(info->forks[1]);
-	philo_push_msg(info, FORKTAKEN);
+	philo_push_msg(philo, THINKING);
+	pthread_mutex_lock(philo->forks[0]);
+	philo_push_msg(philo, FORKTAKEN);
+	pthread_mutex_lock(philo->forks[1]);
+	philo_push_msg(philo, FORKTAKEN);
 }
