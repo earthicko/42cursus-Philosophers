@@ -11,7 +11,8 @@ SRCNAME			= \
 				ft_asciitools \
 				ft_atoi \
 				timetools \
-				msg_queue \
+				msg_queue_init \
+				msg_queue_methods \
 				parser \
 				simulation_allocator \
 				simulation_initializer \
