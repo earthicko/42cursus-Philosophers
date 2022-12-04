@@ -14,40 +14,49 @@
 #include <stdio.h>
 #include <pthread.h>
 
+static int	unlock_and_return(t_msg_queue *queue, int ret)
+{
+	pthread_mutex_unlock(&(queue->mutex));
+	return (ret);
+}
+
+void	setstate_msg_queue(t_msg_queue *queue, int state)
+{
+	pthread_mutex_lock(&(queue->mutex));
+	queue->enabled = state;
+	pthread_mutex_unlock(&(queue->mutex));
+}
+
 int	push_msg_queue(t_msg_queue *queue, t_msg *p_msg)
 {
 	int	i;
 
 	pthread_mutex_lock(&(queue->mutex));
+	if (!queue->enabled)
+		return (unlock_and_return(queue, 1));
 	if (queue->len == queue->cap)
-	{
-		pthread_mutex_unlock(&(queue->mutex));
-		return (-1);
-	}
+		return (unlock_and_return(queue, -1));
 	queue->len++;
 	i = (queue->head + queue->len) % queue->cap;
 	queue->items[i].t = p_msg->t;
 	queue->items[i].i = p_msg->i;
 	queue->items[i].content = p_msg->content;
-	pthread_mutex_unlock(&(queue->mutex));
-	return (0);
+	return (unlock_and_return(queue, 0));
 }
 
 int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 {
 	pthread_mutex_lock(&(queue->mutex));
-	if (queue->len == 0)
-	{
-		pthread_mutex_unlock(&(queue->mutex));
-		return (-1);
-	}
+	if (!queue->enabled)
+		return (unlock_and_return(queue, 1));
+	if (!queue->enabled || queue->len == 0)
+		return (unlock_and_return(queue, -1));
 	queue->head = (queue->head + 1) % queue->cap;
 	queue->len--;
 	ret_msg->t = queue->items[queue->head].t;
 	ret_msg->i = queue->items[queue->head].i;
 	ret_msg->content = queue->items[queue->head].content;
-	pthread_mutex_unlock(&(queue->mutex));
-	return (0);
+	return (unlock_and_return(queue, 0));
 }
 
 void	flush_msg_queue(t_msg_queue *queue)

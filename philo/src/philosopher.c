@@ -32,7 +32,7 @@ void	philo_push_msg(t_philo *philo, int msg)
 {
 	(philo->buf).t = get_t_simulation(philo->env);
 	(philo->buf).content = msg;
-	if (push_msg_queue(philo->table->queue, &(philo->buf)))
+	if (push_msg_queue(philo->table->queue, &(philo->buf)) < 0)
 		exit(handle_error("Message queue full."));
 }
 

@@ -84,6 +84,7 @@ void	loop_until_done(t_table *table, t_env *env)
 		if (env->n_eats_until_done >= 0 && check_if_all_eat(table, env))
 			break ;
 	}
+	setstate_msg_queue(table->queue, 0);
 	i = 0;
 	while (i < table->n_philos)
 	{

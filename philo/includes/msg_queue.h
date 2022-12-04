@@ -34,6 +34,7 @@ typedef struct s_msg
 typedef struct s_msg_queue
 {
 	pthread_mutex_t	mutex;
+	int				enabled;
 	int				cap;
 	int				len;
 	int				head;
@@ -42,6 +43,7 @@ typedef struct s_msg_queue
 
 t_msg_queue	*create_msg_queue(int cap);
 void		destroy_msg_queue(t_msg_queue *queue);
+void		setstate_msg_queue(t_msg_queue *queue, int state);
 int			push_msg_queue(t_msg_queue *queue, t_msg *p_msg);
 int			pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg);
 void		flush_msg_queue(t_msg_queue *queue);

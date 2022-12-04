@@ -24,6 +24,7 @@ t_msg_queue	*create_msg_queue(int cap)
 	queue->cap = cap;
 	queue->len = 0;
 	queue->head = 0;
+	queue->enabled = 1;
 	queue->items = malloc(sizeof(t_msg) * cap);
 	if (!queue->items)
 	{
