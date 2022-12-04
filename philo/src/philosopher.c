@@ -18,6 +18,16 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+int	philo_keep_going(t_philo *philo)
+{
+	int	ret;
+
+	pthread_mutex_lock(philo->table->lock_infos + philo->i);
+	ret = (philo->table->terminate)[philo->i];
+	pthread_mutex_unlock(philo->table->lock_infos + philo->i);
+	return (!ret);
+}
+
 void	philo_push_msg(t_philo *philo, int msg)
 {
 	(philo->buf).t = get_t_simulation(philo->env);
@@ -38,7 +48,7 @@ void	philo_strategy_odd(t_philo *philo)
 	int	counter;
 
 	counter = philo->i;
-	while (1)
+	while (philo_keep_going(philo))
 	{
 		if (counter == 0)
 			ft_usleep(T_INITIAL_DELAY, philo->table->n_philos / 2);
@@ -60,7 +70,7 @@ void	philo_strategy_even(t_philo *philo)
 {
 	if (philo->i % 2)
 	{
-		while (1)
+		while (philo_keep_going(philo))
 		{
 			philo_think(philo);
 			philo_eat(philo);
@@ -69,7 +79,7 @@ void	philo_strategy_even(t_philo *philo)
 	}
 	else
 	{
-		while (1)
+		while (philo_keep_going(philo))
 		{
 			philo_sleep(philo);
 			philo_think(philo);

@@ -37,6 +37,8 @@ int	free_table(t_table *table)
 		free(table->philo_n_eats);
 	if (table->philo_t_last_eat)
 		free(table->philo_t_last_eat);
+	if (table->terminate)
+		free(table->terminate);
 	if (table->fork_ids)
 		free(table->fork_ids);
 	if (table->fork_ids)
@@ -57,14 +59,16 @@ int	alloc_table(t_table *table)
 	table->fork_ids = malloc(sizeof(t_mutex) * table->n_philos);
 	table->philo_n_eats = malloc(sizeof(int) * table->n_philos);
 	table->philo_t_last_eat = malloc(sizeof(time_t) * table->n_philos);
+	table->terminate = malloc(sizeof(int) * table->n_philos);
 	table->lock_infos = malloc(sizeof(t_mutex) * table->n_philos);
-	if (!(table->philo_ids && table->philo_n_eats
-			&& table->fork_ids && table->philo_t_last_eat && table->lock_infos))
+	if (!(table->philo_ids && table->philo_n_eats && table->philo_t_last_eat
+			&& table->fork_ids && table->terminate && table->lock_infos))
 		return (free_table(table));
 	memset(table->philo_ids, 0, sizeof(t_thread) * table->n_philos);
 	memset(table->fork_ids, 0, sizeof(t_mutex) * table->n_philos);
 	memset(table->philo_n_eats, 0, sizeof(int) * table->n_philos);
 	memset(table->philo_t_last_eat, 0, sizeof(time_t) * table->n_philos);
+	memset(table->terminate, 0, sizeof(int) * table->n_philos);
 	memset(table->lock_infos, 0, sizeof(t_mutex) * table->n_philos);
 	return (0);
 }

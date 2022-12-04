@@ -74,13 +74,24 @@ int	check_if_dead(t_table *table, t_env *env)
 
 void	loop_until_done(t_table *table, t_env *env)
 {
+	int	i;
+
 	while (1)
 	{
 		flush_msg_queue(table->queue);
 		if (check_if_dead(table, env))
-			return ;
+			break ;
 		if (env->n_eats_until_done >= 0 && check_if_all_eat(table, env))
-			return ;
+			break ;
+	}
+	i = 0;
+	while (i < table->n_philos)
+	{
+		pthread_mutex_lock(table->lock_infos + i);
+		(table->terminate)[i] = 1;
+		pthread_mutex_unlock(table->lock_infos + i);
+		pthread_join((table->philo_ids)[i], NULL);
+		i++;
 	}
 }
 

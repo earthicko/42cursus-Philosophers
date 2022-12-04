@@ -35,6 +35,7 @@ typedef struct s_table
 	t_mutex		*fork_ids;
 	int			*philo_n_eats;
 	time_t		*philo_t_last_eat;
+	int			*terminate;
 	t_mutex		*lock_infos;
 	t_msg_queue	*queue;
 }	t_table;
