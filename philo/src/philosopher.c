@@ -94,7 +94,6 @@ void	*philo_start_routine(void *arg)
 
 	philo = arg;
 	(philo->buf).i = philo->i + 1;
-	pthread_detach((philo->table->philo_ids)[philo->i]);
 	if (philo->table->n_philos % 2 == 0)
 		philo_strategy_even(philo);
 	else

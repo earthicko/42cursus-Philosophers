@@ -91,6 +91,11 @@ void	loop_until_done(t_table *table, t_env *env)
 		pthread_mutex_lock(table->lock_infos + i);
 		(table->terminate)[i] = 1;
 		pthread_mutex_unlock(table->lock_infos + i);
+		i++;
+	}
+	i = 0;
+	while (i < table->n_philos)
+	{
 		pthread_join((table->philo_ids)[i], NULL);
 		i++;
 	}
