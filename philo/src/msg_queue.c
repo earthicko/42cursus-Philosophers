@@ -51,9 +51,12 @@ int	push_msg_queue(t_msg_queue *queue, t_msg *p_msg)
 {
 	int	i;
 
-	if (queue->len == queue->cap)
-		return (-1);
 	pthread_mutex_lock(&(queue->mutex));
+	if (queue->len == queue->cap)
+	{
+		pthread_mutex_unlock(&(queue->mutex));
+		return (-1);
+	}
 	queue->len++;
 	i = (queue->head + queue->len) % queue->cap;
 	queue->items[i].t = p_msg->t;
@@ -65,9 +68,12 @@ int	push_msg_queue(t_msg_queue *queue, t_msg *p_msg)
 
 int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 {
-	if (queue->len == 0)
-		return (-1);
 	pthread_mutex_lock(&(queue->mutex));
+	if (queue->len == 0)
+	{
+		pthread_mutex_unlock(&(queue->mutex));
+		return (-1);
+	}
 	queue->head = (queue->head + 1) % queue->cap;
 	queue->len--;
 	ret_msg->t = queue->items[queue->head].t;
@@ -79,11 +85,14 @@ int	pop_msg_queue(t_msg_queue *queue, t_msg *ret_msg)
 
 void	flush_msg_queue(t_msg_queue *queue)
 {
+	int		ret;
 	t_msg	buf;
 
-	while (queue->len > 0)
+	while (1)
 	{
-		pop_msg_queue(queue, &buf);
+		ret = pop_msg_queue(queue, &buf);
+		if (ret)
+			return ;
 		printf("%ld %d ", buf.t / 1000, buf.i);
 		if (buf.content == FORKTAKEN)
 			printf("has taken a fork\n");
