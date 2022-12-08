@@ -31,6 +31,12 @@ int	destroy_mutexes(t_mutex *mutexarr, int n)
 
 int	free_table(t_table *table)
 {
+	if (table->fork_ids)
+		destroy_mutexes(table->fork_ids, table->n_philos);
+	if (table->lock_infos)
+		destroy_mutexes(table->lock_infos, table->n_philos);
+	if (table->queue)
+		destroy_msg_queue(table->queue);
 	if (table->philo_ids)
 		free(table->philo_ids);
 	if (table->philo_n_eats)
@@ -41,12 +47,8 @@ int	free_table(t_table *table)
 		free(table->terminate);
 	if (table->fork_ids)
 		free(table->fork_ids);
-	if (table->fork_ids)
-		destroy_mutexes(table->fork_ids, table->n_philos);
 	if (table->lock_infos)
-		destroy_mutexes(table->lock_infos, table->n_philos);
-	if (table->queue)
-		destroy_msg_queue(table->queue);
+		free(table->lock_infos);
 	return (-1);
 }
 
