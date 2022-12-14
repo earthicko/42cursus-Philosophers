@@ -22,8 +22,7 @@ int	destroy_mutexes(t_mutex *mutexarr, int n)
 	i = 0;
 	while (i < n)
 	{
-		if (mutexarr + i)
-			pthread_mutex_destroy(mutexarr + i);
+		pthread_mutex_destroy(mutexarr + i);
 		i++;
 	}
 	return (-1);
