@@ -72,18 +72,18 @@ void	philo_strategy_even(t_philo *philo)
 	{
 		while (philo_keep_going(philo))
 		{
+			philo_sleep(philo);
 			philo_think(philo);
 			philo_eat(philo);
-			philo_sleep(philo);
 		}
 	}
 	else
 	{
 		while (philo_keep_going(philo))
 		{
-			philo_sleep(philo);
 			philo_think(philo);
 			philo_eat(philo);
+			philo_sleep(philo);
 		}
 	}
 }
@@ -94,7 +94,7 @@ void	*philo_start_routine(void *arg)
 
 	philo = arg;
 	(philo->buf).i = philo->i + 1;
-	if (philo->table->n_philos % 2 == 0)
+	if (philo->table->n_philos == 1 || philo->table->n_philos % 2 == 0)
 		philo_strategy_even(philo);
 	else
 		philo_strategy_odd(philo);
