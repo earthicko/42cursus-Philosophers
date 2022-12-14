@@ -16,6 +16,7 @@ SRCNAME			= \
 				parser \
 				simulation_allocator \
 				simulation_initializer \
+				simulation_supervisor \
 				philo_actions \
 				philosopher
 

@@ -49,10 +49,13 @@ typedef struct s_philo
 	t_mutex	*forks[2];
 }	t_philo;
 
-int	destroy_mutexes(t_mutex *mutexarr, int n);
-int	free_table(t_table *table);
-int	alloc_table(t_table *table);
-int	alloc_philos(t_table *table, t_env *env, t_philo **philos);
-int	alloc_players(t_table *table, t_env *env, t_philo **philos);
-int	init_simulation(t_table *table, t_env *env, t_philo *philos);
+int		destroy_mutexes(t_mutex *mutexarr, int n);
+int		free_table(t_table *table);
+int		alloc_table(t_table *table);
+int		alloc_philos(t_table *table, t_env *env, t_philo **philos);
+int		alloc_players(t_table *table, t_env *env, t_philo **philos);
+int		init_simulation(t_table *table, t_env *env, t_philo *philos);
+int		check_if_all_eat(t_table *table, t_env *env);
+int		check_if_dead(t_table *table, t_env *env);
+void	wait_for_all_philos(t_table *table);
 #endif
