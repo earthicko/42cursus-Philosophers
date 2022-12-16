@@ -17,7 +17,7 @@
 # define T_INITIAL_DELAY 100
 
 void	*philo_start_routine(void *arg);
-void	philo_push_msg(t_philo *philo, int msg);
+int		philo_push_msg(t_philo *philo, int msg);
 
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);

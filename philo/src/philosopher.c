@@ -28,12 +28,16 @@ int	philo_keep_going(t_philo *philo)
 	return (!ret);
 }
 
-void	philo_push_msg(t_philo *philo, int msg)
+int	philo_push_msg(t_philo *philo, int msg)
 {
 	(philo->buf).t = get_t_simulation(philo->env);
 	(philo->buf).content = msg;
 	if (push_msg_queue(philo->table->queue, &(philo->buf)) < 0)
-		exit(handle_error("Message queue full."));
+	{
+		handle_error("Message queue full.");
+		return (-1);
+	}
+	return (0);
 }
 
 // strategy suitable for odd number of philos
