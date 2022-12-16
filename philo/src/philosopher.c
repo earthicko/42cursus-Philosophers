@@ -58,11 +58,14 @@ void	philo_strategy_odd(t_philo *philo)
 			ft_usleep(T_INITIAL_DELAY, philo->table->n_philos / 2);
 		else if (counter % 2)
 		{
-			philo_think(philo);
-			philo_eat(philo);
+			if (philo_think(philo) || philo_eat(philo))
+				return ;
 		}
 		else
-			philo_sleep(philo);
+		{
+			if (philo_sleep(philo))
+				return ;
+		}
 		counter = (counter + 1) % philo->table->n_philos;
 	}
 }
@@ -76,18 +79,16 @@ void	philo_strategy_even(t_philo *philo)
 	{
 		while (philo_keep_going(philo))
 		{
-			philo_sleep(philo);
-			philo_think(philo);
-			philo_eat(philo);
+			if (philo_sleep(philo) || philo_think(philo) || philo_eat(philo))
+				return ;
 		}
 	}
 	else
 	{
 		while (philo_keep_going(philo))
 		{
-			philo_think(philo);
-			philo_eat(philo);
-			philo_sleep(philo);
+			if (philo_think(philo) || philo_eat(philo) || philo_sleep(philo))
+				return ;
 		}
 	}
 }

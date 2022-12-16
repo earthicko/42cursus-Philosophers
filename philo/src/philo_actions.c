@@ -29,27 +29,35 @@ static void	philo_report_n_eats(t_philo *philo)
 	pthread_mutex_unlock(philo->table->lock_infos + philo->i);
 }
 
-void	philo_eat(t_philo *philo)
+int	philo_eat(t_philo *philo)
 {
-	philo_push_msg(philo, EATING);
+	if (philo_push_msg(philo, EATING))
+		return (-1);
 	philo_report_last_eat_time(philo);
 	ft_usleep(philo->env->time_eat, philo->table->n_philos / 2);
 	pthread_mutex_unlock(philo->forks[0]);
 	pthread_mutex_unlock(philo->forks[1]);
 	philo_report_n_eats(philo);
+	return (0);
 }
 
-void	philo_sleep(t_philo *philo)
+int	philo_sleep(t_philo *philo)
 {
-	philo_push_msg(philo, SLEEPING);
+	if (philo_push_msg(philo, SLEEPING))
+		return (-1);
 	ft_usleep(philo->env->time_slp, philo->table->n_philos / 2);
+	return (0);
 }
 
-void	philo_think(t_philo *philo)
+int	philo_think(t_philo *philo)
 {
-	philo_push_msg(philo, THINKING);
+	if (philo_push_msg(philo, THINKING))
+		return (-1);
 	pthread_mutex_lock(philo->forks[0]);
-	philo_push_msg(philo, FORKTAKEN);
+	if (philo_push_msg(philo, FORKTAKEN))
+		return (-1);
 	pthread_mutex_lock(philo->forks[1]);
-	philo_push_msg(philo, FORKTAKEN);
+	if (philo_push_msg(philo, FORKTAKEN))
+		return (-1);
+	return (0);
 }

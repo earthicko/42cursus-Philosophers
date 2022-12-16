@@ -19,7 +19,7 @@
 void	*philo_start_routine(void *arg);
 int		philo_push_msg(t_philo *philo, int msg);
 
-void	philo_eat(t_philo *philo);
-void	philo_sleep(t_philo *philo);
-void	philo_think(t_philo *philo);
+int		philo_eat(t_philo *philo);
+int		philo_sleep(t_philo *philo);
+int		philo_think(t_philo *philo);
 #endif
