@@ -13,7 +13,6 @@
 #include "simulation.h"
 #include "ft_atoi.h"
 #include <string.h>
-#include <stdio.h>
 
 static int	parse_times(int argc, char **argv, t_env *env)
 {

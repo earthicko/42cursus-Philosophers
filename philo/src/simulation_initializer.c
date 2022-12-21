@@ -14,7 +14,6 @@
 #include "philo.h"
 #include <pthread.h>
 #include <sys/time.h>
-#include <stdio.h>
 
 static int	abort_init_mutexes(t_table *table)
 {

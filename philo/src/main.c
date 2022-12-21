@@ -11,21 +11,10 @@
 /* ************************************************************************** */
 
 #include "simulation.h"
-#include "philo.h"
-#include "timetools.h"
 #include "error_handler.h"
 #include "parser.h"
 #include "msg_queue.h"
-#include <sys/time.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-
-int	handle_error(char *error_msg)
-{
-	printf("%s\n", error_msg);
-	return (1);
-}
 
 void	loop_until_done(t_table *table, t_env *env)
 {

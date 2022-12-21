@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_HANDLER_H
-# define ERROR_HANDLER_H
+#include <stdio.h>
 
-int	handle_error(char *error_msg);
-#endif
+int	handle_error(char *error_msg)
+{
+	printf("%s\n", error_msg);
+	return (1);
+}
